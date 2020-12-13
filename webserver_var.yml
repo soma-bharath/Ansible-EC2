@@ -1,0 +1,3 @@
+package_name: httpd
+source: /root/web.html
+destination: /var/www/html/
