@@ -1,0 +1,29 @@
+- hosts: localhost
+  vars_prompt:
+   - name: os_name
+     prompt: "enter the os name :"
+     private: no
+  vars_files:
+   - ec2_var.yml
+  tasks:
+  - name: Provisioning EC2 Instances 
+    ec2_instance:
+     region: "{{ region1 }}"
+     image_id: "{{ imageid }}"
+     instance_type: "{{ instancetype }}"
+     vpc_subnet_id: "{{ subnetid }}"
+     security_group: "{{ securitygroup }}"
+     name: "{{  name }}"
+     state: present
+     key_name: "{{ key }}"
+     aws_access_key: "{{ access_key }}"
+     aws_secret_key: "{{ Secret_key }}"
+    register: x
+  - name: Copying the public ip of launched ec2 instance to inventory file
+    copy:
+     content: "{{ x.instances[0].network_interfaces[0].association.public_ip }}"
+     dest: /root/ip.txt
+
+  - name: "wait for a while"
+    pause:
+     minutes: "{{ pausetime }}"
