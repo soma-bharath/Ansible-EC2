@@ -7,6 +7,6 @@ name: "{{ os_name }}"
 vpcid: vpc-afed0cc4
 subnetid: subnet-bb5c52d3
 securitygroup: sg-0fabcb2d14414fd69
-access_key: AKIATFXGWHCNHH5OC4OZ
-Secret_key: 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
+access_key: <enter access key>
+Secret_key: <enter secret key>
 pausetime: 2
