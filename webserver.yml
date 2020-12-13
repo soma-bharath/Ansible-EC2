@@ -1,0 +1,21 @@
+- hosts: all
+  vars_files:
+   - webserver_var.yml
+  tasks:
+  - name: Installing apache web server
+    package:
+     name: "{{ package_name }}"
+  - name: setting up web pages
+    copy:
+     src: "{{ source }}"
+     dest: "{{ destination }}"
+    notify: Restart webserver
+  - name: starting webserver
+    service:
+     name: "{{ package_name }}"
+     state: started
+  handlers:
+  - name: Restart webserver
+    service:
+     name: "{{ package_name }}"
+     state: restarted
